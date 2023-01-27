@@ -28,7 +28,4 @@ class AppModule {
     @Singleton
     fun provideMainApi(retrofit : Retrofit): MainAPI = retrofit.create(MainAPI::class.java)
 
-    @Provides
-    fun provideMainRepository(mainAPI: MainAPI): MainRepository = MainRepository(mainAPI)
-
 }

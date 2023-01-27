@@ -1,9 +1,9 @@
 package com.example.luxsofttest.cloud.model
 
-class PendingTransactionResponse(
+data class PendingTransactionResponse(
     val id: String,
     val merchand: String,
-    val category: String,
+    val category: TransactionCategory,
     val amount: String,
     val currency: String,
     val timestamp: String

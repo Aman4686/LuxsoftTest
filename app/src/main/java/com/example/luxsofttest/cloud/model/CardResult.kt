@@ -1,4 +1,5 @@
 package com.example.luxsofttest.cloud.model
 
-class CardResult() {
-}
+data class CardResult(
+    val amount: Int
+)
