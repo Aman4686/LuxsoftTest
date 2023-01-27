@@ -6,8 +6,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.luxsofttest.base.view.FullScreenLoading
 import com.example.luxsofttest.cloud.model.Transaction
+import com.example.luxsofttest.ui.component.FullScreenLoading
 import com.example.luxsofttest.ui.screens.bankAccount.state.DisplayBankAccountViewState
 import com.example.luxsofttest.ui.screens.bankAccount.state.ErrorBankAccountViewState
 import com.example.luxsofttest.ui.screens.bankAccount.state.InitialBankAccountViewState

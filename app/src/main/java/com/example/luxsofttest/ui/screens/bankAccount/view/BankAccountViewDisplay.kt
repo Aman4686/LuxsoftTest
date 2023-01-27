@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -23,7 +22,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.luxsofttest.R
 import com.example.luxsofttest.cloud.model.*
 import com.example.luxsofttest.ui.component.AmountOfMoney
@@ -47,14 +45,14 @@ fun BankAccountViewDisplay(
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             CardPager(viewState.cardList)
             Spacer(modifier = Modifier.height(24.dp))
-            TwoButtons()
+            ServiceButtons()
             TransactionView(viewState.transactionsList, onViewAllClick, onTransactionClick)
         }
     }
 }
 
 @Composable
-fun TransactionView(
+private fun TransactionView(
     transactionsList: List<TransactionResult>?,
     onViewAllClick: () -> Unit,
     onTransactionClick: (Transaction) -> Unit
@@ -64,7 +62,7 @@ fun TransactionView(
             .fillMaxWidth()
             .padding(12.dp)
             .clip(shape = LuxsoftTestTheme.shapes.cornersStyle)
-            .background(color = Color.White)
+            .background(color = LuxsoftTestTheme.colors.secondaryBackground)
     ) {
         Box(
             modifier = Modifier
@@ -93,7 +91,7 @@ fun TransactionView(
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun CardPager(cardList: List<CardResult>?) {
+private fun CardPager(cardList: List<CardResult>?) {
     cardList?.let {
         val pagerState = rememberPagerState()
 
@@ -119,7 +117,7 @@ fun CardPager(cardList: List<CardResult>?) {
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun AvailableCardAmount(cardList: List<CardResult>, pagerState: PagerState) {
+private fun AvailableCardAmount(cardList: List<CardResult>, pagerState: PagerState) {
     val amountOfCardMoney = cardList[pagerState.currentPage].amount
 
     AmountOfMoney(
@@ -142,16 +140,16 @@ fun AvailableCardAmount(cardList: List<CardResult>, pagerState: PagerState) {
 }
 
 @Composable
-fun TwoButtons() {
+private fun ServiceButtons() {
     Row {
-        ServiceButton(
+        BaseServiceButton(
             text = stringResource(R.string.lock_card),
             icon = painterResource(R.drawable.ic_outline_lock_24)
         ) {
 
         }
-        Spacer(modifier = Modifier.width(58.dp))
-        ServiceButton(
+        Spacer(modifier = Modifier.width(64.dp))
+        BaseServiceButton(
             text = stringResource(R.string.settings),
             icon = painterResource(R.drawable.ic_outline_settings_24)
         ) {
@@ -161,12 +159,12 @@ fun TwoButtons() {
 }
 
 @Composable
-fun ServiceButton(text: String, icon: Painter, onClick: () -> Unit) {
+private fun BaseServiceButton(text: String, icon: Painter, onClick: () -> Unit) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         IconButton(
             onClick = onClick,
             modifier = Modifier
-                .background(Color.White, shape = CircleShape)
+                .background(LuxsoftTestTheme.colors.secondaryBackground, shape = CircleShape)
                 .size(40.dp)
         ) {
             Icon(

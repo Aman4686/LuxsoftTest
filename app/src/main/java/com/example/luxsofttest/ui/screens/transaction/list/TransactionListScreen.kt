@@ -5,7 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.luxsofttest.base.view.FullScreenLoading
+import com.example.luxsofttest.ui.component.FullScreenLoading
 import com.example.luxsofttest.ui.screens.transaction.list.state.DisplayTransactionListViewState
 import com.example.luxsofttest.ui.screens.transaction.list.state.ErrorTransactionListViewState
 import com.example.luxsofttest.ui.screens.transaction.list.state.InitialTransactionListViewEvent

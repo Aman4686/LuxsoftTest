@@ -1,4 +1,4 @@
-package com.example.luxsofttest.base.view
+package com.example.luxsofttest.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
