@@ -59,7 +59,7 @@ private fun TransactionView(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(12.dp)
+            .padding(start = 14.dp, end = 14.dp, top = 14.dp, bottom = 24.dp)
             .clip(shape = LuxsoftTestTheme.shapes.cornersStyle)
             .background(color = LuxsoftTestTheme.colors.secondaryBackground)
     ) {

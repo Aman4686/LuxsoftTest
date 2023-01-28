@@ -9,10 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.luxsofttest.cloud.model.BaseTransaction
-import com.example.luxsofttest.cloud.model.Transaction
-import com.example.luxsofttest.cloud.model.TransactionCategory
-import com.example.luxsofttest.cloud.model.TransactionStatus
+import com.example.luxsofttest.cloud.model.*
 import com.example.luxsofttest.ui.component.AmountOfMoney
 import com.example.luxsofttest.ui.component.TransactionImage
 import com.example.luxsofttest.ui.screens.transaction.detail.state.DisplayTransactionDetailsViewState
@@ -32,8 +29,10 @@ fun TransactionDetailsViewDisplay(
             modifier = Modifier.fillMaxSize()
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
+
                 val pendingTransactionColor =
                     ColorUtils.getPendingColor(status = transactionData.status)
+
                 TransactionImage(transactionData.category, pendingTransactionColor)
                 Text(text = viewState.transaction.merchand, color = pendingTransactionColor)
                 AmountOfMoney(
@@ -42,6 +41,7 @@ fun TransactionDetailsViewDisplay(
                     isTransaction = true,
                     textColor = pendingTransactionColor
                 )
+                Text(text = viewState.transaction.status.toText(), color = pendingTransactionColor)
             }
         }
     }
