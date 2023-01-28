@@ -31,11 +31,6 @@ data class LuxsoftTestShape(
     val cornersStyle: Shape
 )
 
-data class LuxsoftTestImage(
-    val mainIcon: Int,
-    val mainIconDescription: String
-)
-
 object LuxsoftTestTheme {
     val colors: LuxsoftTestColors
         @Composable
@@ -60,10 +55,6 @@ val LocalLuxsoftTestTypography = staticCompositionLocalOf<LuxsoftTestTypography>
 
 val LocalLuxsoftTestShape = staticCompositionLocalOf<LuxsoftTestShape> {
     error("No shapes provided")
-}
-
-enum class LuxsoftTestStyle {
-    Purple, Orange, Blue, Red, Green
 }
 
 enum class LuxsoftTestSize {

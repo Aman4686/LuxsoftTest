@@ -1,39 +1,45 @@
 package com.example.luxsofttest.cloud.model
 
 import android.os.Parcelable
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import com.example.luxsofttest.R
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-interface TransactionResult {
+interface Transaction {
     val merchand: String
     val amount: Int
+    val currency: String
     val category: TransactionCategory
     val status: TransactionStatus
 }
 
 @Parcelize
-data class Transaction(
+data class BaseTransaction(
     override val merchand: String,
     override val amount: Int,
+    override val currency: String,
     override val category: TransactionCategory,
     override val status: TransactionStatus
-) : TransactionResult, Parcelable
+) : Transaction, Parcelable
 
-fun TransactionResult.mapToTransaction() : Transaction {
-    return Transaction(merchand = this.merchand,
-    amount = this.amount,
-    category = this.category,
-    status = this.status)
+fun Transaction.mapToTransaction(): Transaction {
+    return BaseTransaction(
+        merchand = this.merchand,
+        amount = this.amount,
+        currency = this.currency,
+        category = this.category,
+        status = this.status
+    )
 }
 
-@Parcelize
-enum class TransactionStatus : Parcelable{
+enum class TransactionStatus {
     PENDING,
     EXECUTED
 }
 
-@Parcelize
-enum class TransactionCategory : Parcelable {
+enum class TransactionCategory {
 
     @SerializedName("transport")
     TRANSPORT,
@@ -48,9 +54,10 @@ enum class TransactionCategory : Parcelable {
     ENERGY,
 }
 
-fun TransactionStatus.toText() : String {
-    return when(this){
-        TransactionStatus.PENDING -> "Pending"
-        TransactionStatus.EXECUTED -> "Executed"
+@Composable
+fun TransactionStatus.toText(): String {
+    return when (this) {
+        TransactionStatus.PENDING -> stringResource(id = R.string.pending)
+        TransactionStatus.EXECUTED -> stringResource(id = R.string.executed)
     }
 }

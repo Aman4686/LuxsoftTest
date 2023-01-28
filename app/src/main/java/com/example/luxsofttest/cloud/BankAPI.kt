@@ -5,7 +5,7 @@ import com.example.luxsofttest.cloud.model.ExecutedTransactionResponse
 import com.example.luxsofttest.cloud.model.PendingTransactionResponse
 import retrofit2.http.GET
 
-interface MainAPI {
+interface BankAPI {
 
     @GET("c145c7af-b1ea-42f3-ae85-f6fabe6793c1")
     suspend fun getCards() : List<CardResponse>

@@ -1,7 +1,6 @@
 package com.example.luxsofttest.ui.screens.transaction.detail.state
 
 import com.example.luxsofttest.cloud.model.Transaction
-import com.example.luxsofttest.cloud.model.TransactionResult
 
 sealed class TransactionDetailsViewState
 

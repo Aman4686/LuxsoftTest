@@ -1,7 +1,6 @@
 package com.example.luxsofttest.di
 
-import com.example.luxsofttest.cloud.MainAPI
-import com.example.luxsofttest.cloud.MainRepository
+import com.example.luxsofttest.cloud.BankAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,6 +25,6 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideMainApi(retrofit : Retrofit): MainAPI = retrofit.create(MainAPI::class.java)
+    fun provideMainApi(retrofit : Retrofit): BankAPI = retrofit.create(BankAPI::class.java)
 
 }

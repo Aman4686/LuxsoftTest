@@ -2,7 +2,7 @@ package com.example.luxsofttest.ui.screens.transaction.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.luxsofttest.cloud.model.TransactionResult
+import com.example.luxsofttest.cloud.model.Transaction
 import com.example.luxsofttest.cloud.useCase.transaction.GetAllTransactionsUseCase
 import com.example.luxsofttest.ui.screens.transaction.list.state.*
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,7 +31,7 @@ class TransactionListViewModel  @Inject constructor(
         }
     }
 
-    private suspend fun getMixedTransactions() : List<TransactionResult>? {
+    private suspend fun getMixedTransactions() : List<Transaction>? {
         val transactionResult = getAllTransactionsUseCase.invoke(Unit)
         return transactionResult.getOrElse {
             _transactionListViewStateFlow.value = ErrorTransactionListViewState(it)

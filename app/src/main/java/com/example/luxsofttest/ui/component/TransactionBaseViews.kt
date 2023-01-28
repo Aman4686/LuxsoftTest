@@ -10,20 +10,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.luxsofttest.R
 import com.example.luxsofttest.cloud.model.*
-import com.example.luxsofttest.ui.theme.LuxsoftTestColors
-import com.example.luxsofttest.ui.theme.LuxsoftTestSize
-import com.example.luxsofttest.ui.theme.LuxsoftTestStyle
 import com.example.luxsofttest.ui.theme.LuxsoftTestTheme
 import com.example.luxsofttest.utils.ColorUtils
 import java.math.BigDecimal
@@ -32,10 +26,10 @@ import java.math.RoundingMode
 
 @Composable
 fun TransactionList(
-    transactionList: List<TransactionResult>,
+    transactionList: List<Transaction>,
     onTransactionClick: (Transaction) -> Unit
 ) {
-    LazyColumn {
+    LazyColumn(modifier = Modifier.background(color = LuxsoftTestTheme.colors.secondaryBackground)) {
         transactionList.forEach { transaction ->
             item {
                 TransactionItem(transaction, onTransactionClick)
@@ -46,7 +40,7 @@ fun TransactionList(
 
 @Composable
 private fun TransactionItem(
-    transaction: TransactionResult,
+    transaction: Transaction,
     onTransactionClick: (Transaction) -> Unit
 ) {
     val pendingTransactionColor = ColorUtils.getPendingColor(status = transaction.status)
@@ -64,7 +58,11 @@ private fun TransactionItem(
         ) {
             TransactionImage(transaction.category, pendingTransactionColor)
             Spacer(modifier = Modifier.width(width = 24.dp))
-            Text(text = transaction.merchand, style = LuxsoftTestTheme.typography.body)
+            Text(
+                text = transaction.merchand,
+                style = LuxsoftTestTheme.typography.body,
+                color = LuxsoftTestTheme.colors.primaryText
+            )
         }
 
         Row(modifier = Modifier.align(Alignment.CenterEnd)) {
@@ -73,7 +71,8 @@ private fun TransactionItem(
             ) {
                 AmountOfMoney(
                     money = transaction.amount,
-                    isMinus = true,
+                    currency = transaction.currency,
+                    isTransaction = true,
                     textColor = pendingTransactionColor,
                     textStyle = LuxsoftTestTheme.typography.body
                 )
@@ -120,17 +119,17 @@ fun TransactionImage(category: TransactionCategory, imageColor: Color) {
 @Composable
 fun AmountOfMoney(
     money: Int,
-    isMinus: Boolean,
+    currency: String,
+    isTransaction: Boolean,
     textColor: Color = LuxsoftTestTheme.colors.primaryText,
     textStyle: TextStyle = LuxsoftTestTheme.typography.body
 ) {
-    val result = BigDecimal(money).setScale(2, RoundingMode.CEILING)
+    val moneyNumResult = if (isTransaction) money.unaryMinus() else money
+    val moneyBigDecimalResult = BigDecimal(moneyNumResult).setScale(2, RoundingMode.CEILING)
+
     Row {
-        if (isMinus) {
-            Text(text = "-", color = textColor)
-        }
-        Text(text = "$result", style = textStyle, color = textColor)
+        Text(text = "$moneyBigDecimalResult", style = textStyle, color = textColor)
         Spacer(modifier = Modifier.width(4.dp))
-        Text(text = "CHF", style = textStyle, color = textColor)
+        Text(text = currency, style = textStyle, color = textColor)
     }
 }

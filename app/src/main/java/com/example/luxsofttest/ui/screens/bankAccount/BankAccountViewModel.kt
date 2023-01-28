@@ -3,7 +3,7 @@ package com.example.luxsofttest.ui.screens.bankAccount
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.luxsofttest.cloud.model.CardResult
-import com.example.luxsofttest.cloud.model.TransactionResult
+import com.example.luxsofttest.cloud.model.Transaction
 import com.example.luxsofttest.cloud.useCase.card.GetCardsUseCase
 import com.example.luxsofttest.cloud.useCase.transaction.GetAllTransactionsUseCase
 import com.example.luxsofttest.ui.screens.bankAccount.state.*
@@ -36,7 +36,7 @@ class BankAccountViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getMixedTransactions() : List<TransactionResult>? {
+    private suspend fun getMixedTransactions() : List<Transaction>? {
         val transactionResult = getAllTransactionsUseCase.invoke(Unit)
        return transactionResult.getOrElse {
            _bankAccountViewStateFlow.value = ErrorBankAccountViewState(it)

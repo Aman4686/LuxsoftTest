@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import com.example.luxsofttest.cloud.model.Transaction
 import com.example.luxsofttest.ui.screens.transaction.detail.exception.EmptyTransactionDataException
 import com.example.luxsofttest.ui.screens.transaction.detail.state.*
-import com.example.luxsofttest.ui.screens.transaction.list.state.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -2,7 +2,7 @@ package com.example.luxsofttest.cloud.useCase.transaction
 
 import com.example.luxsofttest.cloud.model.ExecutedTransactionResult
 import com.example.luxsofttest.cloud.model.PendingTransactionResult
-import com.example.luxsofttest.cloud.model.TransactionResult
+import com.example.luxsofttest.cloud.model.Transaction
 import com.example.luxsofttest.base.domain.UseCase
 import com.example.luxsofttest.di.DefaultDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
@@ -14,9 +14,9 @@ class GetAllTransactionsUseCase @Inject constructor(
     private val getExecutedTransactionsUseCase: GetExecutedTransactionsUseCase,
     private val getPendingTransactionsUseCase: GetPendingTransactionsUseCase,
     @DefaultDispatcher dispatcher: CoroutineDispatcher
-) : UseCase<Unit, List<TransactionResult>>(dispatcher) {
+) : UseCase<Unit, List<Transaction>>(dispatcher) {
 
-    override suspend fun execute(parameters: Unit): List<TransactionResult> {
+    override suspend fun execute(parameters: Unit): List<Transaction> {
         val pendingTransactionResult = invokePendingTransactionsUseCase()
         val executedTransactionResult = invokeExecutedTransactionsUseCase()
 
